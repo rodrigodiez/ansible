@@ -1,0 +1,14 @@
+---
+- name: download atom
+  get_url:
+    url: https://atom.io/download/rpm
+    dest: /tmp/atom.rpm
+  register: download
+
+- name: install atom
+  dnf:
+    name: /tmp/atom.rpm
+    state: present
+  become: true
+  when: download|succeeded
+

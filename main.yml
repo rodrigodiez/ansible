@@ -1,0 +1,21 @@
+---
+- hosts: all
+  vars:
+    username: rodrigodiez
+    fullname: Rodrigo Díez Villamuera
+    email: rodrigo@rodrigodiez.io
+  roles:
+    - common
+    - ohmyzsh
+    - atom
+    - terminator
+  tasks:
+  - name: create basic src/ structure
+    file:
+      path: ~/src/{{ item }}/{{ username }}
+      state: directory
+      mode: 0755
+    with_items:
+      - github.com
+      - bitbucket.org
+      - gitlab.com

@@ -1,0 +1,4 @@
+---
+- name: install terminator
+  dnf: name=terminator state=latest
+  become: yes

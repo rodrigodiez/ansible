@@ -1,0 +1,25 @@
+---
+- name: install python selinux bindings
+  dnf: name=libselinux-python state=latest
+  become: yes
+
+- name: install
+  dnf: name=git state=latest
+  become: yes
+
+- name: check user email
+  command: "git config --get user.email"
+  register: git_user_email
+  changed_when: git_user_email.stdout != email
+  notify: set user email
+
+- name: check user name
+  command: "git config --get user.name"
+  register: git_user_name
+  changed_when: git_user_name.stdout != fullname
+  notify: set user name
+
+- name: generate user keys
+  user:
+    name: "{{ username }}"
+    generate_ssh_key: yes

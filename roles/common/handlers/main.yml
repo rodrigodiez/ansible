@@ -1,0 +1,9 @@
+---
+- name: set user email
+  command: "git config --global user.email '{{ email }}'"
+  when: git_user_email.stdout != email
+  notify: set user email
+
+- name: set user name
+  command: "git config --global user.name '{{ fullname }}'"
+  when: git_user_name.stdout != fullname
