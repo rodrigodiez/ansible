@@ -1,14 +1,19 @@
 ---
-- name: download atom
+- name: Detect Atom binary
+  stat: path=/usr/bin/atom
+  register: atom_binary
+
+- name: Download Atom package
   get_url:
     url: https://atom.io/download/rpm
     dest: /tmp/atom.rpm
-  register: download
+  when: not atom_binary.stat.exists
+  register: atom_download
 
-- name: install atom
+- name: Install Atom package
   dnf:
     name: /tmp/atom.rpm
     state: present
   become: true
-  when: download|succeeded
-
+  when: not atom_download.skipped and (atom_download | succeeded)
+  notify: login

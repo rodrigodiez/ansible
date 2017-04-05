@@ -1,0 +1,11 @@
+---
+- name: add google-chrome-stable repo
+  yum_repository:
+    name: google-chrome-stable
+    description: google-chrome-stable repo
+    baseurl: http://dl.google.com/linux/chrome/rpm/stable/$basearch
+  become: yes
+
+- name: install google-chrome-stable
+  dnf: name=google-chrome-stable state=latest
+  become: yes

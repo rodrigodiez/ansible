@@ -1,0 +1,27 @@
+---
+- name: gnome network manager vpn plugin
+  dnf: name=NetworkManager-openvpn state=latest
+  become: yes
+
+- name: certificate path
+  file:
+    path: ~/.cert/
+    state: directory
+
+- name: install certificate
+  copy:
+    src: triton-ca.crt
+    dest: ~/.cert/triton-ca.crt
+
+- name: install key
+  copy:
+    src: triton-ta.key
+    dest: ~/.cert/triton-ta.key
+
+- name: create configuration file
+  template:
+    src: config.conf
+    dest: /tmp/triton.conf
+
+- name: create connection
+  command: nmcli connection import type openvpn file /tmp/triton.conf

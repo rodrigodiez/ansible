@@ -1,0 +1,11 @@
+---
+- name: download slack
+  get_url:
+    url: https://downloads.slack-edge.com/linux_releases/slack-2.4.2-0.1.fc21.x86_64.rpm
+    dest: /tmp/slack.rpm
+
+- name: install slack
+  dnf:
+    name: /tmp/slack.rpm
+    state: present
+  become: true

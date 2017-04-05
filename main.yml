@@ -5,17 +5,24 @@
     fullname: Rodrigo Díez Villamuera
     email: rodrigo@rodrigodiez.io
   roles:
-    - common
-    - ohmyzsh
-    - atom
-    - terminator
-  tasks:
-  - name: create basic src/ structure
-    file:
-      path: ~/src/{{ item }}/{{ username }}
-      state: directory
-      mode: 0755
-    with_items:
-      - github.com
-      - bitbucket.org
-      - gitlab.com
+    # - common
+    # - git
+    # - nodejs
+    # - {
+    #     role: rvm_io.ruby,
+    #     tags: ruby,
+    #     rvm1_user: " {{ username }}",
+    #     # See https://github.com/rvm/rvm1-ansible/issues/31
+    #     rvm1_gpg_key_server: 'hkp://pgp.mit.edu'
+    #   }
+    # - ohmyzsh
+    # - terminator
+    # - atom
+    # - slack
+    # - google-chrome
+    # - aws-cli
+    # - personal-repos
+    # - docker
+    # - brighttalk-triton
+    # - brighttalk-repos
+    - selinux

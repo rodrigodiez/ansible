@@ -1,0 +1,13 @@
+---
+- name: clone bitbucket repos
+  git:
+    repo: "git://bitbucket.org/brighttalktech/{{ item }}.git"
+    dest: ~/src/bitbucket.org/brighttalktech/{{ item }}
+    accept_hostkey: true
+    force: no
+  with_items:
+    - sfportal
+    - sfchannel
+    - style-guide
+    - vidora-content-sync
+    - monet-api

@@ -1,0 +1,7 @@
+---
+  - name: login
+    command: "apm login --token {{ atom_token }}"
+    notify: install_packages
+
+  - name: install_packages
+    command: apm starred --install

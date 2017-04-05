@@ -1,0 +1,4 @@
+---
+  - name: install aws-cli
+    pip: name=awscli state=latest
+    become: yes

@@ -1,0 +1,26 @@
+---
+- name: install nodejs
+  dnf: name=nodejs state=latest
+  become: yes
+
+- name: install npm
+  dnf: name=npm state=latest
+  become: yes
+
+- name: install n globally
+  npm:
+    name: n
+    global: yes
+  become: yes
+
+- name: install gulp-cli globally
+  npm:
+    name: gulp-cli
+    global: yes
+  become: yes
+
+- name: install grunt-cli globally
+  npm:
+    name: grunt-cli
+    global: yes
+  become: yes

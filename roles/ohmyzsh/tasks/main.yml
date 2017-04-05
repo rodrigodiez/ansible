@@ -1,19 +1,20 @@
 ---
-- name: install zsh
+- name: Install zsh
   dnf: name=zsh state=latest
   become: yes
   register: shell_install
 
-- name: clone oh-my-zsh
+- name: Clone oh-my-zsh
   git:
     repo: git://github.com/robbyrussell/oh-my-zsh.git
     dest: ~/.oh-my-zsh
     accept_hostkey: true
     force: no
+    update: yes
   when: shell_install|succeeded
   register: clone
 
-- name: copy default .zshrc
+- name: Copy default .zshrc
   copy:
     src: ~/.oh-my-zsh/templates/zshrc.zsh-template
     dest: ~/.zshrc
@@ -21,9 +22,19 @@
   when: clone|succeeded
   register: copy
 
-- name: set zsh as default shell
+- name: Set zsh as default shell
   user:
     name: "{{ username }}"
     shell: /bin/zsh
   when: copy|succeeded
   become: yes
+
+- name: Install variables
+  copy:
+    src: variables.zsh
+    dest: ~/.oh-my-zsh/custom/variables.zsh
+
+- name: Install aliases
+  copy:
+    src: aliases.zsh
+    dest: ~/.oh-my-zsh/custom/aliases.zsh

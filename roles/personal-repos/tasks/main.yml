@@ -1,0 +1,9 @@
+---
+- name: clone github repos
+  git:
+    repo: "git://github.com/rodrigodiez/{{ item }}.git"
+    dest: ~/src/github.com/rodrigodiez/{{ item }}
+    accept_hostkey: true
+    force: no
+  with_items:
+    - rodrigodiez.io
